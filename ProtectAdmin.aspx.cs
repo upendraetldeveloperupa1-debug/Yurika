@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebKiu
+{
+    public partial class ProtectAdmin : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (Session["UserId"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
+            if (Session["UserRole"] == null ||
+                Session["UserRole"].ToString() != "Admin")
+            {
+                Response.Redirect("Default.aspx");
+                return;
+            }
+
+            if (!IsPostBack)
+            {
+                // existing code
+            }
+        }
+    }
+}
